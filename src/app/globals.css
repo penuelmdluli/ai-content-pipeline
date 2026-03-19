@@ -1,8 +1,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer base { body { background: #060612; color: #f0f0f0; } }
-@layer utilities {
-  .grid-bg { background-image: linear-gradient(rgba(139,92,246,0.04) 1px,transparent 1px), linear-gradient(90deg,rgba(139,92,246,0.04) 1px,transparent 1px); background-size: 40px 40px; }
-  .glow-purple { box-shadow: 0 0 30px #8B5CF633; }
-}
+@layer base { body { background: #050510; color: #e2e8f0; font-family: 'Courier New', monospace; } }
