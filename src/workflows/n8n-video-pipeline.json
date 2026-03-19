@@ -1,0 +1,13 @@
+{
+  "name": "AI Video Content Pipeline",
+  "description": "Full automation: Script → ElevenLabs voice → Kling avatar → CapCut → TikTok/YouTube",
+  "nodes": [
+    { "id": "1", "type": "Schedule Trigger", "config": { "cron": "0 9,14,19 * * *", "timezone": "Africa/Johannesburg" } },
+    { "id": "2", "type": "HTTP Request", "name": "Generate Script", "config": { "url": "{{APP_URL}}/api/generate-script", "method": "POST" } },
+    { "id": "3", "type": "HTTP Request", "name": "ElevenLabs TTS", "config": { "url": "https://api.elevenlabs.io/v1/text-to-speech/{{VOICE_ID}}", "method": "POST", "headers": { "xi-api-key": "{{ELEVENLABS_KEY}}" } } },
+    { "id": "4", "type": "HTTP Request", "name": "Kling Avatar (via API)", "config": { "url": "https://api.klingai.com/v1/videos/avatar", "method": "POST" } },
+    { "id": "5", "type": "Supabase", "name": "Save to DB", "config": { "operation": "insert", "table": "content_queue" } },
+    { "id": "6", "type": "HTTP Request", "name": "Post to TikTok", "config": { "url": "https://open-api.tiktok.com/share/video/upload", "method": "POST" } }
+  ],
+  "connections": [["1","2"],["2","3"],["3","4"],["4","5"],["5","6"]]
+}
